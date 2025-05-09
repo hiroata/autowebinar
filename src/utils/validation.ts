@@ -8,9 +8,9 @@ export const validateInputForm = (form: InputFormData) => {
   if (!form.text && !form.audio && !form.video)
     newErrors.text = "テキスト・音声・動画のいずれかは必須です";
   if (form.price <= 0) newErrors.price = "価格は1円以上で入力してください";
-  if (form.audio && form.audio.size > 10 * 1024 * 1024)
-    newErrors.audio = "音声ファイルは10MB以下にしてください";
-  if (form.video && form.video.size > 100 * 1024 * 1024)
-    newErrors.video = "動画ファイルは100MB以下にしてください";
+  if (form.audio && form.audio.size > 4 * 1024 * 1024)
+    newErrors.audio = "音声ファイルは4MB以下にしてください (サーバーレス制限)";
+  if (form.video && form.video.size > 4 * 1024 * 1024)
+    newErrors.video = "動画ファイルは4MB以下にしてください (サーバーレス制限)";
   return newErrors;
 };
