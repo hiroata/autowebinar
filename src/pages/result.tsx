@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -84,6 +84,7 @@ const ResultPage: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
   const [result, setResult] = React.useState<GenerateResult | null>(null);
   const [sessionId] = React.useState(() => Math.random().toString(36).substring(2));
+  const router = useRouter();
 
   React.useEffect(() => {
     const data = localStorage.getItem("autowebinar_result");
@@ -195,7 +196,7 @@ const ResultPage: React.FC = () => {
               生成データがありません。トップページから再度生成をお試しください。
               <div className="mt-4">
                 <Button 
-                  onClick={() => useRouter().push("/")}
+                  onClick={() => router.push("/")}
                   variant="primary"
                 >
                   トップページへ戻る

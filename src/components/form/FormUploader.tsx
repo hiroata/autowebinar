@@ -28,10 +28,10 @@ const FormUploader: React.FC = () => {
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
   const router = useRouter();
 
-  const generateMutation = useMutation(
-    (
+  const generateMutation = useMutation({
+    mutationFn: (
       payload: Omit<
-        typeof form & { audioPath: string | null; videoPath: string | null },
+        InputFormData & { audioPath: string | null; videoPath: string | null },
         "audio" | "video"
       >
     ) =>
@@ -40,13 +40,11 @@ const FormUploader: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       }),
-    {
-      onSuccess: (data) => {
-        localStorage.setItem("autowebinar_result", JSON.stringify(data));
-        router.push("/result");
-      },
-    }
-  );
+    onSuccess: (data) => {
+      localStorage.setItem("autowebinar_result", JSON.stringify(data));
+      router.push("/result");
+    },
+  });
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -148,13 +146,15 @@ const FormUploader: React.FC = () => {
 
       // 生成API呼び出し
       const payload = {
-        ...form,
+        name: form.name,
+        genre: form.genre,
+        expertise: form.expertise,
+        text: form.text,
+        price: form.price,
+        salesPeriod: form.salesPeriod,
         audioPath,
         videoPath,
       };
-
-      delete payload.audio;
-      delete payload.video;
 
       await generateMutation.mutateAsync(payload);
     } catch (err) {

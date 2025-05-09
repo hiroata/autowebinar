@@ -29,8 +29,8 @@ export type GenerateResult = {
 // UIコンポーネント型
 export interface ButtonProps extends BaseProps {
   onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "outline";
+  size?: "sm" | "md" | "lg";
   disabled?: boolean;
   fullWidth?: boolean;
   children: React.ReactNode;
@@ -65,7 +65,7 @@ export interface ApiResponse<T> {
 
 // ユーザ設定型
 export interface UserSettings {
-  theme: 'light' | 'dark' | 'system';
+  theme: "light" | "dark" | "system";
   autoSubmit: boolean;
   notifications: boolean;
 }

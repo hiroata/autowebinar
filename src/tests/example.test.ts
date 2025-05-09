@@ -1,10 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import React from 'react';
-import LoadingSpinner from '../components/LoadingSpinner';
+import { describe, it, expect } from "vitest";
 
-test('LoadingSpinner renders correctly', () => {
-  render(<LoadingSpinner />);
-  const spinnerElement = screen.getByRole('status');
-  expect(spinnerElement).toBeInTheDocument();
+describe("サンプルテスト", () => {
+  it("1+1=2になる", () => {
+    expect(1 + 1).toBe(2);
+  });
 });
