@@ -1,0 +1,39 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main  # メインブランチにプッシュされた時に実行
+
+jobs:
+  deploy:
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      # 方法1: Renderのデプロイフック経由でデプロイをトリガー
+      - name: Deploy to Render via webhook
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+
+      # 方法2: Renderのデプロイ APIを使用（コメントアウト状態）
+      # - name: Deploy to Render via API
+      #  run: |
+      #    curl -X POST \
+      #      -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+      #      -H "Content-Type: application/json" \
+      #      https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
