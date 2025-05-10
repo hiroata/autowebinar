@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+　import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@tanstack/react-query";
 import type { InputFormData } from "../../types";
@@ -9,6 +9,7 @@ import { apiClient } from "../../utils/apiClient";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
+import ModelSelector from "../ui/model/ModelSelector"; // モデル選択UIをインポート
 
 const initialForm: InputFormData = {
   name: "",
@@ -26,12 +27,18 @@ const FormUploader: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
+  // AIモデル選択状態を追加
+  const [selectedModel, setSelectedModel] = useState('gemini');
   const router = useRouter();
 
   const generateMutation = useMutation({
     mutationFn: (
       payload: Omit<
-        InputFormData & { audioPath: string | null; videoPath: string | null },
+        InputFormData & { 
+          audioPath: string | null; 
+          videoPath: string | null;
+          aiModel: string; // AIモデル選択を追加
+        },
         "audio" | "video"
       >
     ) =>
@@ -59,6 +66,11 @@ const FormUploader: React.FC = () => {
     const { name, files } = e.target;
     if (!files) return;
     setForm((prev) => ({ ...prev, [name]: files[0] }));
+  };
+
+  // AIモデル変更ハンドラーを追加
+  const handleModelChange = (model: string) => {
+    setSelectedModel(model);
   };
 
   const validate = validateInputForm;
@@ -154,6 +166,7 @@ const FormUploader: React.FC = () => {
         salesPeriod: form.salesPeriod,
         audioPath,
         videoPath,
+        aiModel: selectedModel, // モデル選択を追加
       };
 
       await generateMutation.mutateAsync(payload);
@@ -168,7 +181,7 @@ const FormUploader: React.FC = () => {
     }
   };
 
-  if (loading) return <LoadingSpinner message="データを処理中..." />;
+  if (loading) return <LoadingSpinner text="データを処理中..." />;
 
   return (
     <form
@@ -297,6 +310,13 @@ const FormUploader: React.FC = () => {
           <option value="evergreen">エバーグリーン</option>
         </select>
       </div>
+      
+      {/* AIモデルセレクターを追加 */}
+      <ModelSelector
+        selectedModel={selectedModel}
+        onChange={handleModelChange}
+        disabled={loading}
+      />
       
       <Button type="submit" variant="primary" fullWidth={true}>
         送信

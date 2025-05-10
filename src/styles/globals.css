@@ -2,107 +2,267 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  body {
-    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
+@layer base {
+  :root {
+    --header-height: 70px;
+    --transition-default: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
   
-  .container {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 0 22px;
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans bg-neutral-50 text-neutral-700 antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-neutral-800 tracking-tight;
   }
   
   h1 {
-    font-size: 40px;
-    line-height: 1.1;
-    font-weight: 600;
-    letter-spacing: -0.009em;
+    @apply text-3xl md:text-5xl font-bold leading-tight md:leading-tight;
   }
   
   h2 {
-    font-size: 32px;
-    line-height: 1.2;
-    font-weight: 600;
-    letter-spacing: -0.006em;
+    @apply text-2xl md:text-4xl font-bold leading-snug md:leading-snug;
   }
   
   h3 {
-    font-size: 24px;
-    line-height: 1.25;
-    font-weight: 500;
-    letter-spacing: -0.003em;
+    @apply text-xl md:text-2xl font-semibold leading-relaxed;
+  }
+  
+  h4 {
+    @apply text-lg md:text-xl font-medium leading-relaxed;
+  }
+  
+  p {
+    @apply text-base leading-relaxed text-neutral-600;
+  }
+  
+  a {
+    @apply text-primary-600 transition-colors hover:text-primary-700;
+  }
+  
+  ::selection {
+    @apply bg-primary-100 text-primary-800;
+  }
+}
+
+@layer components {
+  body {
+    font-family: 'Inter', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+  
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section {
+    @apply py-12 md:py-20;
+  }
+  
+  .card {
+    @apply bg-white rounded p-6 shadow-md transition-shadow hover:shadow-lg;
+  }
+  
+  .glass-card {
+    @apply bg-white/70 backdrop-blur rounded p-6 shadow-glass border border-white/20;
   }
   
   .input {
-    width: 100%;
-    padding: 12px 16px;
-    border-radius: 12px;
-    border: 1px solid #d2d2d7;
-    background: #fff;
-    font-size: 17px;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    transition: all 0.3s;
+    @apply w-full px-4 py-2.5 rounded border border-neutral-300 bg-white 
+      text-base text-neutral-700 placeholder:text-neutral-400
+      transition-all duration-200 focus:outline-none focus:border-primary-500 
+      focus:ring-2 focus:ring-primary-500/20;
   }
   
-  .input:focus {
-    outline: none;
-    border-color: #0071e3;
-    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+  .btn {
+    @apply inline-flex items-center justify-center font-medium rounded 
+      transition-colors duration-200 shadow-md focus:outline-none 
+      focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-50 
+      disabled:opacity-60 disabled:cursor-not-allowed;
   }
   
   .btn-primary {
-    background: #0071e3;
-    color: white;
-    padding: 12px 22px;
-    border-radius: 980px;
-    font-size: 17px;
-    font-weight: 400;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
+    @apply btn bg-primary-500 text-white hover:bg-primary-600 
+      focus:ring-primary-500 active:bg-primary-700;
   }
   
-  .btn-primary:hover {
-    background: #0077ed;
-    transform: scale(1.01);
+  .btn-secondary {
+    @apply btn bg-secondary-500 text-white hover:bg-secondary-600 
+      focus:ring-secondary-500 active:bg-secondary-700;
+  }
+  
+  .btn-outline {
+    @apply btn bg-transparent text-primary-600 border border-primary-300 
+      hover:bg-primary-50 focus:ring-primary-500 active:bg-primary-100;
+  }
+  
+  .btn-subtle {
+    @apply btn bg-primary-50 text-primary-700 hover:bg-primary-100 
+      focus:ring-primary-500 active:bg-primary-200;
+  }
+  
+  .btn-danger {
+    @apply btn bg-accent-error text-white hover:bg-red-600 
+      focus:ring-red-500 active:bg-red-700;
+  }
+  
+  .btn-xs {
+    @apply px-2.5 py-1.5 text-xs;
+  }
+  
+  .btn-sm {
+    @apply px-3.5 py-2 text-sm;
+  }
+  
+  .btn-md {
+    @apply px-5 py-2.5 text-base;
+  }
+  
+  .btn-lg {
+    @apply px-7 py-3 text-lg;
   }
   
   label {
-    font-size: 17px;
-    font-weight: 500;
-    color: #1d1d1f;
-    display: block;
-    margin-bottom: 6px;
+    @apply block mb-1.5 text-sm font-medium text-neutral-700;
+  }
+  
+  .form-group {
+    @apply mb-5;
+  }
+  
+  .form-error {
+    @apply mt-1.5 text-sm text-accent-error;
+  }
+  
+  .table-container {
+    @apply w-full overflow-x-auto rounded shadow-md;
+  }
+  
+  table {
+    @apply w-full border-collapse;
+  }
+  
+  thead {
+    @apply bg-neutral-50;
+  }
+  
+  th {
+    @apply p-4 text-left font-medium text-neutral-600;
+  }
+  
+  td {
+    @apply p-4 border-t border-neutral-200;
+  }
+  
+  tr {
+    @apply hover:bg-neutral-50/70 transition-colors;
+  }
+  
+  .modal-overlay {
+    @apply fixed inset-0 bg-neutral-900/40 backdrop-blur-sm z-50
+      flex items-center justify-center p-4;
+  }
+  
+  .modal-content {
+    @apply bg-white rounded max-w-md w-full shadow-xl p-6
+      animate-fade-in;
+  }
+  
+  .divider {
+    @apply w-full h-px bg-neutral-200 my-8;
+  }
+  
+  /* バッジスタイル */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-primary {
+    @apply bg-primary-100 text-primary-700;
+  }
+  
+  .badge-secondary {
+    @apply bg-secondary-100 text-secondary-700;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-700;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-700;
+  }
+  
+  .badge-error {
+    @apply bg-red-100 text-red-700;
+  }
+  
+  .badge-subtle {
+    @apply bg-neutral-100 text-neutral-700;
+  }
+  
+  /* アニメーション */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulseSubtle 2s infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes pulseSubtle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
   
   /* レスポンシブデザイン */
   @media (max-width: 640px) {
     h1 {
-      font-size: 32px;
+      @apply text-2xl;
     }
     
     h2 {
-      font-size: 24px;
+      @apply text-xl;
     }
     
     .input {
-      font-size: 16px;
-      padding: 10px 14px;
-    }
-    
-    .btn-primary {
-      padding: 10px 20px;
-      font-size: 16px;
+      @apply text-base py-2;
     }
     
     main {
-      padding: 16px;
+      @apply px-4;
+    }
+    
+    .card {
+      @apply p-4;
     }
   }
   
@@ -112,8 +272,8 @@
     max-width: 100%;
     font-size: 16px;
     background: #fff;
-    border: 1px solid #d2d2d7;
-    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
     padding: 10px;
   }
   
@@ -121,30 +281,19 @@
   .lp-preview-container {
     width: 100%;
     overflow-x: auto;
-    border-radius: 12px;
+    border-radius: 0.375rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     background: #fff;
+    border: 1px solid #e5e7eb;
   }
   
-  /* テーブル */
-  table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
+  /* コード */
+  pre {
+    @apply bg-neutral-50 p-4 rounded text-neutral-800 text-sm 
+      border border-neutral-200 overflow-x-auto;
   }
   
-  table th {
-    background: #f5f5f7;
-    padding: 16px;
-    font-weight: 500;
-    text-align: left;
-    color: #1d1d1f;
-  }
-  
-  table td {
-    padding: 16px;
-    border-top: 1px solid #d2d2d7;
+  code {
+    @apply font-mono text-neutral-800 bg-neutral-100 px-1 py-0.5 rounded;
   }
 }
