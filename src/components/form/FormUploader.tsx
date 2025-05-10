@@ -186,19 +186,19 @@ const FormUploader: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 max-w-lg mx-auto p-8 bg-white rounded-apple shadow-apple"
+      className="space-y-6 max-w-lg mx-auto p-8 bg-white rounded shadow-md"
     >
       {uploadProgress !== null && (
-        <div className="w-full bg-apple-gray-100 rounded-pill h-3 mb-2 overflow-hidden">
+        <div className="w-full bg-neutral-100 rounded-full h-3 mb-2 overflow-hidden">
           <div
-            className="bg-apple-blue h-3 rounded-pill"
+            className="bg-primary-500 h-3 rounded-full"
             style={{ width: `${uploadProgress}%` }}
           />
         </div>
       )}
       
       {errors.submit && (
-        <div className="text-red-500 text-center bg-red-50 p-3 rounded-apple">
+        <div className="text-red-500 text-center bg-red-50 p-3 rounded">
           {errors.submit}
         </div>
       )}
@@ -231,7 +231,7 @@ const FormUploader: React.FC = () => {
       />
       
       <div className="mb-4">
-        <label className="block mb-1.5 text-apple-gray-500 font-medium">
+        <label className="block mb-1.5 text-neutral-600 font-medium">
           テキスト素材
         </label>
         <textarea
@@ -239,15 +239,15 @@ const FormUploader: React.FC = () => {
           value={form.text}
           onChange={handleChange}
           rows={3}
-          className={`w-full px-4 py-3 rounded-apple border border-apple-gray-200 bg-white 
-          focus:outline-none focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/10
+          className={`w-full px-4 py-3 rounded border border-neutral-200 bg-white 
+          focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10
           transition-all duration-200 ${errors.text ? "border-red-500" : ""}`}
         />
         {errors.text && <p className="mt-1 text-sm text-red-500">{errors.text}</p>}
       </div>
       
       <div className="mb-4">
-        <label className="block mb-1.5 text-apple-gray-500 font-medium">
+        <label className="block mb-1.5 text-neutral-600 font-medium">
           音声ファイル
         </label>
         <input
@@ -255,10 +255,10 @@ const FormUploader: React.FC = () => {
           name="audio"
           accept="audio/*"
           onChange={handleFileChange}
-          className="w-full bg-white border border-apple-gray-200 rounded-apple p-2"
+          className="w-full bg-white border border-neutral-200 rounded p-2"
         />
         {form.audio && (
-          <div className="mt-1 text-sm text-apple-gray-400">
+          <div className="mt-1 text-sm text-neutral-400">
             {form.audio.name}（{(form.audio.size / 1024 / 1024).toFixed(1)}MB）
           </div>
         )}
@@ -266,7 +266,7 @@ const FormUploader: React.FC = () => {
       </div>
       
       <div className="mb-4">
-        <label className="block mb-1.5 text-apple-gray-500 font-medium">
+        <label className="block mb-1.5 text-neutral-600 font-medium">
           動画ファイル
         </label>
         <input
@@ -274,10 +274,10 @@ const FormUploader: React.FC = () => {
           name="video"
           accept="video/*"
           onChange={handleFileChange}
-          className="w-full bg-white border border-apple-gray-200 rounded-apple p-2"
+          className="w-full bg-white border border-neutral-200 rounded p-2"
         />
         {form.video && (
-          <div className="mt-1 text-sm text-apple-gray-400">
+          <div className="mt-1 text-sm text-neutral-400">
             {form.video.name}（{(form.video.size / 1024 / 1024).toFixed(1)}MB）
           </div>
         )}
@@ -295,15 +295,15 @@ const FormUploader: React.FC = () => {
       />
       
       <div className="mb-4">
-        <label className="block mb-1.5 text-apple-gray-500 font-medium">
+        <label className="block mb-1.5 text-neutral-600 font-medium">
           販売期間
         </label>
         <select
           name="salesPeriod"
           value={form.salesPeriod}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-apple border border-apple-gray-200 bg-white
-          focus:outline-none focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/10
+          className="w-full px-4 py-3 rounded border border-neutral-200 bg-white
+          focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10
           transition-all duration-200"
         >
           <option value="limited">期限あり</option>
