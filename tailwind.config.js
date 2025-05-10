@@ -1,11 +1,7 @@
 module.exports = {
+  darkMode: "class", // ダークモード対応
   content: [
-    "./src/pages/**/*.{js,jsx,ts,tsx}",
-    "./src/components/**/*.{js,jsx,ts,tsx}",
-    "./src/templates/**/*.{js,jsx,ts,tsx}",
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./pages/**/*.{js,jsx,ts,tsx}",
-    "./components/**/*.{js,jsx,ts,tsx}",
     "./public/**/*.html"
   ],
   theme: {
@@ -30,7 +26,7 @@ module.exports = {
           200: "#99f6e4",
           300: "#5eead4",
           400: "#2dd4bf",
-          500: "#14b8a6", // アクセントカラー
+          500: "#14b8a6", // サブアクセント
           600: "#0d9488",
           700: "#0f766e",
           800: "#115e59",
@@ -51,15 +47,16 @@ module.exports = {
           950: "#09090b",
         },
         accent: {
-          success: "#10b981", // より洗練された緑
-          warning: "#f59e0b", // より洗練された黄色
-          error: "#ef4444",   // より洗練された赤
-          info: "#3b82f6"     // より洗練された青
+          success: "#10b981", // 成功
+          warning: "#f59e0b", // 警告
+          error: "#ef4444",   // エラー
+          info: "#3b82f6"     // 情報
         },
       },
       fontFamily: {
         sans: [
           "Inter",
+          "Noto Sans JP",
           "SF Pro Text",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -68,6 +65,7 @@ module.exports = {
         ],
         display: [
           "Inter",
+          "Noto Sans JP",
           "SF Pro Display",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -76,30 +74,30 @@ module.exports = {
         ]
       },
       borderRadius: {
-        "sm": "0.375rem",    // 6px
-        "md": "0.5rem",      // 8px
+        sm: "0.375rem",    // 6px
+        md: "0.5rem",      // 8px
         DEFAULT: "0.75rem",  // 12px
-        "lg": "1rem",        // 16px
-        "xl": "1.5rem",      // 24px
+        lg: "1rem",        // 16px
+        xl: "1.5rem",      // 24px
         "2xl": "2rem",       // 32px
-        "pill": "9999px",
+        pill: "9999px",
       },
       boxShadow: {
-        "sm": "0 1px 2px rgba(0, 0, 0, 0.04)",
+        sm: "0 1px 2px rgba(0, 0, 0, 0.04)",
         DEFAULT: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-        "md": "0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04)",
-        "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-        "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+        md: "0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04)",
+        lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        xl: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
         "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-        "glass": "0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1)",
+        glass: "0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1)",
         "neu-soft": "6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)",
-        "inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
+        inner: "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
       },
       spacing: {
-        "18": "4.5rem",
-        "72": "18rem",
-        "84": "21rem",
-        "96": "24rem",
+        18: "4.5rem",
+        72: "18rem",
+        84: "21rem",
+        96: "24rem",
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -131,13 +129,18 @@ module.exports = {
         },
       },
       backdropBlur: {
-        'xs': '2px',
-        'sm': '4px',
+        xs: '2px',
+        sm: '4px',
         DEFAULT: '8px',
-        'lg': '12px',
-        'xl': '16px',
+        lg: '12px',
+        xl: '16px',
       },
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/line-clamp'),
+  ],
 };
