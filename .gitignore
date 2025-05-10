@@ -1,3 +1,4 @@
 # Ignore build and dependency directories
 .next/
 node_modules/
+.env

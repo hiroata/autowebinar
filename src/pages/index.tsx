@@ -27,7 +27,8 @@ const HeroIllustration = () => (
 // トップページ：入力フォームUIを表示
 const IndexPage: React.FC = () => {
   const { addToast } = useToast();
-  const [activeStep, setActiveStep] = useState(1);
+  // activeStepはステップ表示のために使用（将来的にマルチステップフォーム実装時にsetActiveStepを使用予定）
+  const [activeStep] = useState(1);
   
   // ユーザーにヘルプ情報を表示するための機能
   const showHelp = () => {

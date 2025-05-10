@@ -1,5 +1,4 @@
 import React from 'react';
-import { AI_CONFIG } from '../../../utils/config';
 
 interface ModelSelectorProps {
   selectedModel: string;

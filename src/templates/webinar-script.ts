@@ -5,11 +5,11 @@ import { generateWebinarScript as newGenerateWebinarScript } from './generators/
 export async function generateWebinarScript({
   topic,
   personality,
-  duration = 10,
+  // durationパラメータを削除（未使用のため）
 }: {
   topic: string;
   personality: string;
-  duration?: number; // 分
+  // duration?: number; // 分（未使用のため削除）
 }): Promise<string> {
   // 新しいジェネレーターを使用し、インターフェースを合わせる
   return await newGenerateWebinarScript({

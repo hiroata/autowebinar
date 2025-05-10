@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image'; // Next.jsのImageコンポーネントをインポート
 
 interface CardProps {
   children: React.ReactNode;
@@ -88,10 +89,12 @@ const Card: React.FC<CardProps> = ({
     <Component className={cardClasses} onClick={onClick} {...props}>
       {image && (
         <div className={`rounded-t overflow-hidden ${imageMarginClass[padding]}`}>
-          <img 
+          <Image 
             src={image} 
             alt="Card header" 
             className="w-full object-cover" 
+            width={800}
+            height={500}
             style={{ height: imageHeight }}
           />
         </div>
