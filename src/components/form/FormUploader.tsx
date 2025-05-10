@@ -1,4 +1,4 @@
-　import React, { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@tanstack/react-query";
 import type { InputFormData } from "../../types";
